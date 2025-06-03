@@ -38,7 +38,7 @@ jobs:
           ~/.local/bin/grype your-image:latest -o json > grype_report.json
 
       - name: Upload Scan Results
-        uses: actions/upload-artifact@v3.0.2
+        uses: actions/upload-artifact@v2
         with:
           name: security-reports
           path: |

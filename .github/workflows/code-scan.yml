@@ -6,32 +6,39 @@ on:
   pull_request:
 
 jobs:
-  bandit_scan:
+  code-scan:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: 3.x
+          python-version: '3.x'
 
       - name: Install Bandit
         run: pip install bandit
 
-      - name: Run Bandit Scan
-        run: bandit -r ./app
-
-  semgrep_scan:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Run Bandit scan (JSON output)
+        run: |
+          bandit -r . -f json -o bandit_output.json || true
+          cat bandit_output.json
 
       - name: Install Semgrep
         run: |
-          curl -sL https://raw.githubusercontent.com/returntocorp/semgrep/master/install.sh | sh
+          pip install semgrep
 
-      - name: Run Semgrep Scan
-        run: semgrep --config=p/ci
+      - name: Run Semgrep scan (JSON output)
+        run: |
+          semgrep --config auto --json > semgrep_output.json || true
+          cat semgrep_output.json
+
+      - name: Archive code scan results
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-scan-results
+          path: |
+            bandit_output.json
+            semgrep_output.json

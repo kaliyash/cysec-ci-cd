@@ -22,12 +22,14 @@ jobs:
       run: |
         curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
 
-    - name: Run Trivy scan
-      run: trivy image --exit-code 0 cysec-ci-cd-app
+    - name: Run Trivy scan (non-blocking)
+      run: |
+        trivy image --exit-code 0 --no-progress cysec-ci-cd-app || true
 
     - name: Install Grype
       run: |
         curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
 
-    - name: Run Grype scan
-      run: grype cysec-ci-cd-app || true
+    - name: Run Grype scan (non-blocking)
+      run: |
+        grype cysec-ci-cd-app || true

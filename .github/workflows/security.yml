@@ -1,6 +1,8 @@
 name: Security CI/CD Pipeline
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
 
 jobs:
   security_scan:
@@ -10,7 +12,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Python
+      - name: Set up Python 3.9
         uses: actions/setup-python@v4
         with:
           python-version: 3.9
@@ -32,10 +34,16 @@ jobs:
           format: json
           output: trivy_report.json
 
-      - name: Run Grype Docker Scan
+      - name: Install Grype
         run: |
           curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b $HOME/.local/bin
+
+      - name: Run Grype Docker Scan
+        run: |
           ~/.local/bin/grype your-image:latest -o json > grype_report.json
+
+      - name: List report files before upload
+        run: ls -lh bandit_report.json semgrep_report.json trivy_report.json grype_report.json || echo "One or more reports missing"
 
       - name: Upload Scan Results
         uses: actions/upload-artifact@v2

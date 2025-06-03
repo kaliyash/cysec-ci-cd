@@ -40,7 +40,7 @@ jobs:
         ./semgrep/semgrep --config=p/ci sample_app --json > semgrep_results.json || true
 
     - name: Upload scan results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@latest
       with:
         name: scan-results
         path: |

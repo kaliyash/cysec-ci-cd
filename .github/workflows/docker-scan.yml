@@ -1,4 +1,4 @@
-name: Docker Image Security Scan and Code Scan
+name: Docker Image Security Scan
 
 on:
   push:
@@ -34,22 +34,3 @@ jobs:
 
       - name: Run Grype scan (non-blocking)
         run: grype cysec-ci-cd-app || true
-
-      # Phase 2: Code Scanning with Bandit and Semgrep
-      
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.11
-
-      - name: Install Bandit
-        run: pip install bandit
-
-      - name: Run Bandit security scan
-        run: bandit -r ./app || true
-
-      - name: Install Semgrep
-        run: pip install semgrep
-
-      - name: Run Semgrep security scan
-        run: semgrep --config=auto ./app || true

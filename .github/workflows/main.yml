@@ -2,9 +2,9 @@ name: CI Pipeline
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   build-test:
@@ -28,3 +28,21 @@ jobs:
       run: |
         cd sample_app
         python app.py
+
+    - name: Run Bandit scan
+      run: |
+        pip install bandit
+        bandit -r sample_app -f json -o bandit_results.json || true
+
+    - name: Run Semgrep scan
+      run: |
+        curl -sL https://semgrep.dev/install.sh | bash
+        ./semgrep/semgrep --config=p/ci sample_app --json > semgrep_results.json || true
+
+    - name: Upload scan results
+      uses: actions/upload-artifact@v3
+      with:
+        name: scan-results
+        path: |
+          bandit_results.json
+          semgrep_results.json

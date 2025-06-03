@@ -30,7 +30,7 @@ jobs:
         run: grype -o json cysec-ci-cd-app > grype-report.json
 
       - name: Upload scan reports as artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: security-scan-reports
           path: |

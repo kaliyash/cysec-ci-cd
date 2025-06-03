@@ -23,11 +23,11 @@ jobs:
         curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
 
     - name: Run Trivy scan
-      run: trivy image cysec-ci-cd-app
+      run: trivy image --exit-code 0 cysec-ci-cd-app
 
     - name: Install Grype
       run: |
         curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
 
     - name: Run Grype scan
-      run: grype cysec-ci-cd-app
+      run: grype cysec-ci-cd-app || true

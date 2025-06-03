@@ -24,7 +24,7 @@ jobs:
 
     - name: Run Trivy scan (non-blocking)
       run: |
-        trivy image --exit-code 0 --no-progress cysec-ci-cd-app || true
+        trivy image cysec-ci-cd-app || echo "Trivy scan completed with vulnerabilities."
 
     - name: Install Grype
       run: |
@@ -32,4 +32,4 @@ jobs:
 
     - name: Run Grype scan (non-blocking)
       run: |
-        grype cysec-ci-cd-app || true
+        grype cysec-ci-cd-app || echo "Grype scan completed with vulnerabilities."

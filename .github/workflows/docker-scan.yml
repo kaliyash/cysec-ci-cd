@@ -18,18 +18,12 @@ jobs:
     - name: Build Docker image
       run: docker build -t cysec-ci-cd-app .
 
-    - name: Install Trivy
-      run: |
-        curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+    - name: Scan with Trivy
+      uses: aquasecurity/trivy-action@v0.7.0
+      with:
+        image-ref: cysec-ci-cd-app
 
-    - name: Run Trivy scan (non-blocking)
-      run: |
-        trivy image cysec-ci-cd-app || echo "Trivy scan completed with vulnerabilities."
-
-    - name: Install Grype
-      run: |
-        curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
-
-    - name: Run Grype scan (non-blocking)
-      run: |
-        grype cysec-ci-cd-app || echo "Grype scan completed with vulnerabilities."
+    - name: Scan with Grype
+      uses: anchore/grype-action@v0.6.0
+      with:
+        image: cysec-ci-cd-app

@@ -27,20 +27,22 @@ This project establishes a CI/CD security automation framework using GitHub Acti
 - **Discord Webhooks** for alerting.
 
 ## Folder Structure
-cysec-ci-cd/
-├── .github/
-│   └── workflows/
-│       └── security_full.yml         # GitHub Actions CI workflow
-├── scans/                            # Stores raw scan outputs from tools
-│   ├── code/                         # Bandit and Semgrep outputs
-│   └── image/                        # Trivy and Grype outputs
-├── templates/
-│   └── dashboard.html                # HTML template for Flask dashboard
-├── dashboard.py                      # Flask app to visualize scan results
-├── scan_results.db                   # SQLite database (auto-generated)
-├── store_scan_results.py            # Script to insert scan results into DB
-├── requirements.txt                  # Python dependencies list
-├── README.md                         # Project documentation
+.github/workflows/security_full.yml – GitHub Actions workflow for automated scanning
+
+scans/ – Directory storing raw scan outputs
+   code/ – Bandit and Semgrep JSON outputs
+   image/ – Trivy and Grype JSON outputs
+
+templates/
+    dashboard.html – Jinja2 template for the Flask dashboard
+
+dashboard.py – Flask application to visualize scan results
+
+store_scan_results.py – Script to parse scan outputs into SQLite DB
+
+scan_results.db – SQLite database containing structured scan summaries
+
+README.md – Project overview and documentation
 
 ## Environment Setup
 

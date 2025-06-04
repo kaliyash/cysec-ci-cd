@@ -55,7 +55,7 @@ jobs:
 
     - name: Send Discord alert if vulnerabilities found
       env:
-        DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}
       run: |
         python3 - <<'EOF'
         import json

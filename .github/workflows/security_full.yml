@@ -60,7 +60,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: scan-results
-        path: scans/
+        path: scan_results.db
 
     - name: Send Discord alert if vulnerabilities found
       env:

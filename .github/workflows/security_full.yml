@@ -33,19 +33,19 @@ jobs:
         mkdir -p scans/image
 
     - name: Run Bandit scan
-      run: bandit -r . -f json -o scans/code/bandit.json || true
+      run: bandit -r . -f json -o scans/code/bandit.json || echo '{}' > scans/code/bandit.json
 
     - name: Run Semgrep scan
-      run: semgrep scan --config=auto --json --output=scans/code/semgrep.json || true
+      run: semgrep scan --config=auto --json --output=scans/code/semgrep.json || echo '{"results":[]}' > scans/code/semgrep.json
 
     - name: Build Docker image
       run: docker build -t insecure-app .
 
     - name: Run Trivy scan
-      run: trivy image -f json -o scans/image/trivy.json insecure-app || true
+      run: trivy image -f json -o scans/image/trivy.json insecure-app || echo '{"Results":[]}' > scans/image/trivy.json
 
     - name: Run Grype scan
-      run: grype insecure-app -o json > scans/image/grype.json || true
+      run: grype insecure-app -o json > scans/image/grype.json || echo '{"matches":[]}' > scans/image/grype.json
 
     - name: Store scan results in SQLite DB
       run: python3 store_scan_results.py

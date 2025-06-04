@@ -48,6 +48,7 @@ def init_db():
     return conn
 
 def insert_result(conn, tool, count):
+    print(f"Inserting {count} issues for {tool} into database")
     c = conn.cursor()
     c.execute('INSERT INTO scan_results (scan_date, tool, issue_count) VALUES (?, ?, ?)',
               (datetime.now(timezone.utc).isoformat(), tool, count))
@@ -58,6 +59,11 @@ def main():
     semgrep_data = load_json("scans/code/semgrep.json")
     trivy_data = load_json("scans/image/trivy.json")
     grype_data = load_json("scans/image/grype.json")
+
+    print("Bandit issues:", count_bandit_issues(bandit_data))
+    print("Semgrep issues:", count_semgrep_issues(semgrep_data))
+    print("Trivy issues:", count_trivy_issues(trivy_data))
+    print("Grype issues:", count_grype_issues(grype_data))
 
     conn = init_db()
 

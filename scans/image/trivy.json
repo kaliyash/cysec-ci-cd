@@ -1,110 +1,110 @@
 {
   "SchemaVersion": 2,
-  "CreatedAt": "2025-06-04T10:13:51.537547197Z",
+  "CreatedAt": "2025-06-04T20:55:18.313353739Z",
   "ArtifactName": "insecure-app",
   "ArtifactType": "container_image",
   "Metadata": {
-    "Size": 385650176,
+    "Size": 385659392,
     "OS": {
       "Family": "debian",
       "Name": "12.11"
     },
-    "ImageID": "sha256:1b62a88b74e5876184a32aebd951af8587cc779798c61f31f2b5b5c019794816",
+    "ImageID": "sha256:cc8f85c2b75d19ff16fdea137a37b4788ca50f6af1623e324f6e88bc47c58393",
     "DiffIDs": [
       "sha256:ace34d1d784c01e3f9d156687089e8f58f786e23ccd097bdbbf337d6d28b3783",
-      "sha256:8bf67d194bcd8be12a0aa46d2313e1777b2af801d8249f683cac1c693aa3831f",
-      "sha256:16a0a828d0fbf5214f31a17476331e8628411cb420dda300acee850ea10425b4",
-      "sha256:15d85754b85a1f4ee0b68e6c5fd6ff7d2009dda9f922d886c0c44f8127a49665",
-      "sha256:29c0e79a81e03b742e51944638cd89f550bddd24cf98331b897b5fc1a781e49d",
-      "sha256:a71746461c0ce24a160c0d7439bb4ffe2c3196afcc1f0a96d037e0a0726d5d32",
-      "sha256:59e58160186aceed24fb4c82d4a46fa624112528445039c362dd348e3ce8e34c",
-      "sha256:90ae5aee454573fa465ebc273c5995bf8eae5752c01d967211ee7ca60d01927d"
+      "sha256:5a6a85bb1c4a7c040bcba5986afa0d54830e3bd430d7438832c814275f8d6ada",
+      "sha256:9d13c89fb66835859876cd4e635b56747743b9a7d086219a1ab093d4acde65cc",
+      "sha256:28b83acd74ab82d4015a64b7305df95bd38b6783230d6c2742673025ddeaf42b",
+      "sha256:2a158cf7a63d43086a11a3a2a2c3aea076ff74ae585d928bb8a5916c08feda45",
+      "sha256:3ffd3f1dd0b0195ca85263a707ce1a089f2d215a523df6a254cc40ae2d0aae61",
+      "sha256:fce27c2f47b8f5b5a10e79816f60dd30053a3cb38ae987f33bc894197a514ddb",
+      "sha256:4602b3050a7384c8e71d9039aa6955df2143e6ea92843880165808f1b1e00a7d"
     ],
     "RepoTags": [
       "insecure-app:latest"
     ],
     "ImageConfig": {
       "architecture": "amd64",
-      "created": "2025-06-04T10:13:41.527708103Z",
+      "created": "2025-06-04T20:55:08.513377652Z",
       "history": [
         {
-          "created": "2025-05-08T22:27:23Z",
+          "created": "2025-05-20T00:00:00Z",
           "created_by": "# debian.sh --arch 'amd64' out/ 'bookworm' '@1747699200'",
           "comment": "debuerreotype 0.15"
         },
         {
-          "created": "2025-05-08T22:27:23Z",
+          "created": "2025-06-03T21:49:13Z",
           "created_by": "ENV PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
           "comment": "buildkit.dockerfile.v0",
           "empty_layer": true
         },
         {
-          "created": "2025-05-08T22:27:23Z",
+          "created": "2025-06-03T21:49:13Z",
           "created_by": "ENV LANG=C.UTF-8",
           "comment": "buildkit.dockerfile.v0",
           "empty_layer": true
         },
         {
-          "created": "2025-05-08T22:27:23Z",
+          "created": "2025-06-03T21:49:13Z",
           "created_by": "RUN /bin/sh -c set -eux; \tapt-get update; \tapt-get install -y --no-install-recommends \t\tca-certificates \t\tnetbase \t\ttzdata \t; \trm -rf /var/lib/apt/lists/* # buildkit",
           "comment": "buildkit.dockerfile.v0"
         },
         {
-          "created": "2025-05-08T22:27:23Z",
+          "created": "2025-06-03T21:49:13Z",
           "created_by": "ENV GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D",
           "comment": "buildkit.dockerfile.v0",
           "empty_layer": true
         },
         {
-          "created": "2025-05-08T22:27:23Z",
-          "created_by": "ENV PYTHON_VERSION=3.10.17",
+          "created": "2025-06-03T21:49:13Z",
+          "created_by": "ENV PYTHON_VERSION=3.10.18",
           "comment": "buildkit.dockerfile.v0",
           "empty_layer": true
         },
         {
-          "created": "2025-05-08T22:27:23Z",
-          "created_by": "ENV PYTHON_SHA256=4c68050f049d1b4ac5aadd0df5f27941c0350d2a9e7ab0907ee5eb5225d9d6b0",
+          "created": "2025-06-03T21:49:13Z",
+          "created_by": "ENV PYTHON_SHA256=ae665bc678abd9ab6a6e1573d2481625a53719bc517e9a634ed2b9fefae3817f",
           "comment": "buildkit.dockerfile.v0",
           "empty_layer": true
         },
         {
-          "created": "2025-05-08T22:27:23Z",
+          "created": "2025-06-03T21:49:13Z",
           "created_by": "RUN /bin/sh -c set -eux; \t\tsavedAptMark=\"$(apt-mark showmanual)\"; \tapt-get update; \tapt-get install -y --no-install-recommends \t\tdpkg-dev \t\tgcc \t\tgnupg \t\tlibbluetooth-dev \t\tlibbz2-dev \t\tlibc6-dev \t\tlibdb-dev \t\tlibffi-dev \t\tlibgdbm-dev \t\tliblzma-dev \t\tlibncursesw5-dev \t\tlibreadline-dev \t\tlibsqlite3-dev \t\tlibssl-dev \t\tmake \t\ttk-dev \t\tuuid-dev \t\twget \t\txz-utils \t\tzlib1g-dev \t; \t\twget -O python.tar.xz \"https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz\"; \techo \"$PYTHON_SHA256 *python.tar.xz\" | sha256sum -c -; \twget -O python.tar.xz.asc \"https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz.asc\"; \tGNUPGHOME=\"$(mktemp -d)\"; export GNUPGHOME; \tgpg --batch --keyserver hkps://keys.openpgp.org --recv-keys \"$GPG_KEY\"; \tgpg --batch --verify python.tar.xz.asc python.tar.xz; \tgpgconf --kill all; \trm -rf \"$GNUPGHOME\" python.tar.xz.asc; \tmkdir -p /usr/src/python; \ttar --extract --directory /usr/src/python --strip-components=1 --file python.tar.xz; \trm python.tar.xz; \t\tcd /usr/src/python; \tgnuArch=\"$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)\"; \t./configure \t\t--build=\"$gnuArch\" \t\t--enable-loadable-sqlite-extensions \t\t--enable-optimizations \t\t--enable-option-checking=fatal \t\t--enable-shared \t\t$(test \"$gnuArch\" != 'riscv64-linux-musl' \u0026\u0026 echo '--with-lto') \t\t--with-ensurepip \t; \tnproc=\"$(nproc)\"; \tEXTRA_CFLAGS=\"$(dpkg-buildflags --get CFLAGS)\"; \tLDFLAGS=\"$(dpkg-buildflags --get LDFLAGS)\"; \tLDFLAGS=\"${LDFLAGS:--Wl},--strip-all\"; \tmake -j \"$nproc\" \t\t\"EXTRA_CFLAGS=${EXTRA_CFLAGS:-}\" \t\t\"LDFLAGS=${LDFLAGS:-}\" \t; \trm python; \tmake -j \"$nproc\" \t\t\"EXTRA_CFLAGS=${EXTRA_CFLAGS:-}\" \t\t\"LDFLAGS=${LDFLAGS:--Wl},-rpath='\\$\\$ORIGIN/../lib'\" \t\tpython \t; \tmake install; \t\tcd /; \trm -rf /usr/src/python; \t\tfind /usr/local -depth \t\t\\( \t\t\t\\( -type d -a \\( -name test -o -name tests -o -name idle_test \\) \\) \t\t\t-o \\( -type f -a \\( -name '*.pyc' -o -name '*.pyo' -o -name 'libpython*.a' \\) \\) \t\t\\) -exec rm -rf '{}' + \t; \t\tldconfig; \t\tapt-mark auto '.*' \u003e /dev/null; \tapt-mark manual $savedAptMark; \tfind /usr/local -type f -executable -not \\( -name '*tkinter*' \\) -exec ldd '{}' ';' \t\t| awk '/=\u003e/ { so = $(NF-1); if (index(so, \"/usr/local/\") == 1) { next }; gsub(\"^/(usr/)?\", \"\", so); printf \"*%s\\n\", so }' \t\t| sort -u \t\t| xargs -r dpkg-query --search \t\t| cut -d: -f1 \t\t| sort -u \t\t| xargs -r apt-mark manual \t; \tapt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \trm -rf /var/lib/apt/lists/*; \t\texport PYTHONDONTWRITEBYTECODE=1; \tpython3 --version; \t\tpip3 install \t\t--disable-pip-version-check \t\t--no-cache-dir \t\t--no-compile \t\t'setuptools==65.5.1' \t\t'wheel\u003c0.46' \t; \tpip3 --version # buildkit",
           "comment": "buildkit.dockerfile.v0"
         },
         {
-          "created": "2025-05-08T22:27:23Z",
+          "created": "2025-06-03T21:49:13Z",
           "created_by": "RUN /bin/sh -c set -eux; \tfor src in idle3 pip3 pydoc3 python3 python3-config; do \t\tdst=\"$(echo \"$src\" | tr -d 3)\"; \t\t[ -s \"/usr/local/bin/$src\" ]; \t\t[ ! -e \"/usr/local/bin/$dst\" ]; \t\tln -svT \"$src\" \"/usr/local/bin/$dst\"; \tdone # buildkit",
           "comment": "buildkit.dockerfile.v0"
         },
         {
-          "created": "2025-05-08T22:27:23Z",
+          "created": "2025-06-03T21:49:13Z",
           "created_by": "CMD [\"python3\"]",
           "comment": "buildkit.dockerfile.v0",
           "empty_layer": true
         },
         {
-          "created": "2025-06-04T10:13:27Z",
+          "created": "2025-06-04T20:54:52Z",
           "created_by": "WORKDIR /app",
           "comment": "buildkit.dockerfile.v0"
         },
         {
-          "created": "2025-06-04T10:13:27Z",
+          "created": "2025-06-04T20:54:52Z",
           "created_by": "COPY app/ app/ # buildkit",
           "comment": "buildkit.dockerfile.v0"
         },
         {
-          "created": "2025-06-04T10:13:27Z",
+          "created": "2025-06-04T20:54:52Z",
           "created_by": "COPY requirements.txt . # buildkit",
           "comment": "buildkit.dockerfile.v0"
         },
         {
-          "created": "2025-06-04T10:13:41Z",
+          "created": "2025-06-04T20:55:08Z",
           "created_by": "RUN /bin/sh -c pip install --no-cache-dir -r requirements.txt # buildkit",
           "comment": "buildkit.dockerfile.v0"
         },
         {
-          "created": "2025-06-04T10:13:41Z",
+          "created": "2025-06-04T20:55:08Z",
           "created_by": "CMD [\"python3\" \"app/app.py\"]",
           "comment": "buildkit.dockerfile.v0",
           "empty_layer": true
@@ -115,13 +115,13 @@
         "type": "layers",
         "diff_ids": [
           "sha256:ace34d1d784c01e3f9d156687089e8f58f786e23ccd097bdbbf337d6d28b3783",
-          "sha256:8bf67d194bcd8be12a0aa46d2313e1777b2af801d8249f683cac1c693aa3831f",
-          "sha256:16a0a828d0fbf5214f31a17476331e8628411cb420dda300acee850ea10425b4",
-          "sha256:15d85754b85a1f4ee0b68e6c5fd6ff7d2009dda9f922d886c0c44f8127a49665",
-          "sha256:29c0e79a81e03b742e51944638cd89f550bddd24cf98331b897b5fc1a781e49d",
-          "sha256:a71746461c0ce24a160c0d7439bb4ffe2c3196afcc1f0a96d037e0a0726d5d32",
-          "sha256:59e58160186aceed24fb4c82d4a46fa624112528445039c362dd348e3ce8e34c",
-          "sha256:90ae5aee454573fa465ebc273c5995bf8eae5752c01d967211ee7ca60d01927d"
+          "sha256:5a6a85bb1c4a7c040bcba5986afa0d54830e3bd430d7438832c814275f8d6ada",
+          "sha256:9d13c89fb66835859876cd4e635b56747743b9a7d086219a1ab093d4acde65cc",
+          "sha256:28b83acd74ab82d4015a64b7305df95bd38b6783230d6c2742673025ddeaf42b",
+          "sha256:2a158cf7a63d43086a11a3a2a2c3aea076ff74ae585d928bb8a5916c08feda45",
+          "sha256:3ffd3f1dd0b0195ca85263a707ce1a089f2d215a523df6a254cc40ae2d0aae61",
+          "sha256:fce27c2f47b8f5b5a10e79816f60dd30053a3cb38ae987f33bc894197a514ddb",
+          "sha256:4602b3050a7384c8e71d9039aa6955df2143e6ea92843880165808f1b1e00a7d"
         ]
       },
       "config": {
@@ -133,8 +133,8 @@
           "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
           "LANG=C.UTF-8",
           "GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D",
-          "PYTHON_VERSION=3.10.17",
-          "PYTHON_SHA256=4c68050f049d1b4ac5aadd0df5f27941c0350d2a9e7ab0907ee5eb5225d9d6b0"
+          "PYTHON_VERSION=3.10.18",
+          "PYTHON_SHA256=ae665bc678abd9ab6a6e1573d2481625a53719bc517e9a634ed2b9fefae3817f"
         ],
         "WorkingDir": "/app",
         "ArgsEscaped": true
@@ -147,31 +147,31 @@
       },
       {
         "Size": 9551360,
-        "DiffID": "sha256:8bf67d194bcd8be12a0aa46d2313e1777b2af801d8249f683cac1c693aa3831f"
+        "DiffID": "sha256:5a6a85bb1c4a7c040bcba5986afa0d54830e3bd430d7438832c814275f8d6ada"
       },
       {
-        "Size": 44831744,
-        "DiffID": "sha256:16a0a828d0fbf5214f31a17476331e8628411cb420dda300acee850ea10425b4"
+        "Size": 44835840,
+        "DiffID": "sha256:9d13c89fb66835859876cd4e635b56747743b9a7d086219a1ab093d4acde65cc"
       },
       {
         "Size": 5120,
-        "DiffID": "sha256:15d85754b85a1f4ee0b68e6c5fd6ff7d2009dda9f922d886c0c44f8127a49665"
+        "DiffID": "sha256:28b83acd74ab82d4015a64b7305df95bd38b6783230d6c2742673025ddeaf42b"
       },
       {
         "Size": 1536,
-        "DiffID": "sha256:29c0e79a81e03b742e51944638cd89f550bddd24cf98331b897b5fc1a781e49d"
+        "DiffID": "sha256:2a158cf7a63d43086a11a3a2a2c3aea076ff74ae585d928bb8a5916c08feda45"
       },
       {
         "Size": 3072,
-        "DiffID": "sha256:a71746461c0ce24a160c0d7439bb4ffe2c3196afcc1f0a96d037e0a0726d5d32"
+        "DiffID": "sha256:3ffd3f1dd0b0195ca85263a707ce1a089f2d215a523df6a254cc40ae2d0aae61"
       },
       {
         "Size": 2560,
-        "DiffID": "sha256:59e58160186aceed24fb4c82d4a46fa624112528445039c362dd348e3ce8e34c"
+        "DiffID": "sha256:fce27c2f47b8f5b5a10e79816f60dd30053a3cb38ae987f33bc894197a514ddb"
       },
       {
-        "Size": 253379584,
-        "DiffID": "sha256:90ae5aee454573fa465ebc273c5995bf8eae5752c01d967211ee7ca60d01927d"
+        "Size": 253384704,
+        "DiffID": "sha256:4602b3050a7384c8e71d9039aa6955df2143e6ea92843880165808f1b1e00a7d"
       }
     ]
   },
@@ -1948,7 +1948,7 @@
           "InstalledVersion": "1.20.1-2+deb12u3",
           "Status": "affected",
           "Layer": {
-            "DiffID": "sha256:16a0a828d0fbf5214f31a17476331e8628411cb420dda300acee850ea10425b4"
+            "DiffID": "sha256:9d13c89fb66835859876cd4e635b56747743b9a7d086219a1ab093d4acde65cc"
           },
           "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-3576",
           "DataSource": {
@@ -2001,7 +2001,7 @@
           "InstalledVersion": "1.20.1-2+deb12u3",
           "Status": "affected",
           "Layer": {
-            "DiffID": "sha256:16a0a828d0fbf5214f31a17476331e8628411cb420dda300acee850ea10425b4"
+            "DiffID": "sha256:9d13c89fb66835859876cd4e635b56747743b9a7d086219a1ab093d4acde65cc"
           },
           "SeveritySource": "debian",
           "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2018-5709",
@@ -2054,7 +2054,7 @@
           "InstalledVersion": "1.20.1-2+deb12u3",
           "Status": "affected",
           "Layer": {
-            "DiffID": "sha256:16a0a828d0fbf5214f31a17476331e8628411cb420dda300acee850ea10425b4"
+            "DiffID": "sha256:9d13c89fb66835859876cd4e635b56747743b9a7d086219a1ab093d4acde65cc"
           },
           "SeveritySource": "debian",
           "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-26458",
@@ -2122,7 +2122,7 @@
           "InstalledVersion": "1.20.1-2+deb12u3",
           "Status": "affected",
           "Layer": {
-            "DiffID": "sha256:16a0a828d0fbf5214f31a17476331e8628411cb420dda300acee850ea10425b4"
+            "DiffID": "sha256:9d13c89fb66835859876cd4e635b56747743b9a7d086219a1ab093d4acde65cc"
           },
           "SeveritySource": "debian",
           "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-26461",
@@ -2190,7 +2190,7 @@
           "InstalledVersion": "1.20.1-2+deb12u3",
           "Status": "affected",
           "Layer": {
-            "DiffID": "sha256:16a0a828d0fbf5214f31a17476331e8628411cb420dda300acee850ea10425b4"
+            "DiffID": "sha256:9d13c89fb66835859876cd4e635b56747743b9a7d086219a1ab093d4acde65cc"
           },
           "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-3576",
           "DataSource": {
@@ -2243,7 +2243,7 @@
           "InstalledVersion": "1.20.1-2+deb12u3",
           "Status": "affected",
           "Layer": {
-            "DiffID": "sha256:16a0a828d0fbf5214f31a17476331e8628411cb420dda300acee850ea10425b4"
+            "DiffID": "sha256:9d13c89fb66835859876cd4e635b56747743b9a7d086219a1ab093d4acde65cc"
           },
           "SeveritySource": "debian",
           "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2018-5709",
@@ -2296,7 +2296,7 @@
           "InstalledVersion": "1.20.1-2+deb12u3",
           "Status": "affected",
           "Layer": {
-            "DiffID": "sha256:16a0a828d0fbf5214f31a17476331e8628411cb420dda300acee850ea10425b4"
+            "DiffID": "sha256:9d13c89fb66835859876cd4e635b56747743b9a7d086219a1ab093d4acde65cc"
           },
           "SeveritySource": "debian",
           "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-26458",
@@ -2364,7 +2364,7 @@
           "InstalledVersion": "1.20.1-2+deb12u3",
           "Status": "affected",
           "Layer": {
-            "DiffID": "sha256:16a0a828d0fbf5214f31a17476331e8628411cb420dda300acee850ea10425b4"
+            "DiffID": "sha256:9d13c89fb66835859876cd4e635b56747743b9a7d086219a1ab093d4acde65cc"
           },
           "SeveritySource": "debian",
           "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-26461",
@@ -2432,7 +2432,7 @@
           "InstalledVersion": "1.20.1-2+deb12u3",
           "Status": "affected",
           "Layer": {
-            "DiffID": "sha256:16a0a828d0fbf5214f31a17476331e8628411cb420dda300acee850ea10425b4"
+            "DiffID": "sha256:9d13c89fb66835859876cd4e635b56747743b9a7d086219a1ab093d4acde65cc"
           },
           "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-3576",
           "DataSource": {
@@ -2485,7 +2485,7 @@
           "InstalledVersion": "1.20.1-2+deb12u3",
           "Status": "affected",
           "Layer": {
-            "DiffID": "sha256:16a0a828d0fbf5214f31a17476331e8628411cb420dda300acee850ea10425b4"
+            "DiffID": "sha256:9d13c89fb66835859876cd4e635b56747743b9a7d086219a1ab093d4acde65cc"
           },
           "SeveritySource": "debian",
           "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2018-5709",
@@ -2538,7 +2538,7 @@
           "InstalledVersion": "1.20.1-2+deb12u3",
           "Status": "affected",
           "Layer": {
-            "DiffID": "sha256:16a0a828d0fbf5214f31a17476331e8628411cb420dda300acee850ea10425b4"
+            "DiffID": "sha256:9d13c89fb66835859876cd4e635b56747743b9a7d086219a1ab093d4acde65cc"
           },
           "SeveritySource": "debian",
           "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-26458",
@@ -2606,7 +2606,7 @@
           "InstalledVersion": "1.20.1-2+deb12u3",
           "Status": "affected",
           "Layer": {
-            "DiffID": "sha256:16a0a828d0fbf5214f31a17476331e8628411cb420dda300acee850ea10425b4"
+            "DiffID": "sha256:9d13c89fb66835859876cd4e635b56747743b9a7d086219a1ab093d4acde65cc"
           },
           "SeveritySource": "debian",
           "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-26461",
@@ -2674,7 +2674,7 @@
           "InstalledVersion": "1.20.1-2+deb12u3",
           "Status": "affected",
           "Layer": {
-            "DiffID": "sha256:16a0a828d0fbf5214f31a17476331e8628411cb420dda300acee850ea10425b4"
+            "DiffID": "sha256:9d13c89fb66835859876cd4e635b56747743b9a7d086219a1ab093d4acde65cc"
           },
           "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-3576",
           "DataSource": {
@@ -2727,7 +2727,7 @@
           "InstalledVersion": "1.20.1-2+deb12u3",
           "Status": "affected",
           "Layer": {
-            "DiffID": "sha256:16a0a828d0fbf5214f31a17476331e8628411cb420dda300acee850ea10425b4"
+            "DiffID": "sha256:9d13c89fb66835859876cd4e635b56747743b9a7d086219a1ab093d4acde65cc"
           },
           "SeveritySource": "debian",
           "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2018-5709",
@@ -2780,7 +2780,7 @@
           "InstalledVersion": "1.20.1-2+deb12u3",
           "Status": "affected",
           "Layer": {
-            "DiffID": "sha256:16a0a828d0fbf5214f31a17476331e8628411cb420dda300acee850ea10425b4"
+            "DiffID": "sha256:9d13c89fb66835859876cd4e635b56747743b9a7d086219a1ab093d4acde65cc"
           },
           "SeveritySource": "debian",
           "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-26458",
@@ -2848,7 +2848,7 @@
           "InstalledVersion": "1.20.1-2+deb12u3",
           "Status": "affected",
           "Layer": {
-            "DiffID": "sha256:16a0a828d0fbf5214f31a17476331e8628411cb420dda300acee850ea10425b4"
+            "DiffID": "sha256:9d13c89fb66835859876cd4e635b56747743b9a7d086219a1ab093d4acde65cc"
           },
           "SeveritySource": "debian",
           "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-26461",
@@ -2975,7 +2975,7 @@
           "InstalledVersion": "6.4-4",
           "Status": "affected",
           "Layer": {
-            "DiffID": "sha256:16a0a828d0fbf5214f31a17476331e8628411cb420dda300acee850ea10425b4"
+            "DiffID": "sha256:9d13c89fb66835859876cd4e635b56747743b9a7d086219a1ab093d4acde65cc"
           },
           "SeveritySource": "nvd",
           "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-50495",
@@ -3599,7 +3599,7 @@
           "InstalledVersion": "3.40.1-2+deb12u1",
           "Status": "affected",
           "Layer": {
-            "DiffID": "sha256:16a0a828d0fbf5214f31a17476331e8628411cb420dda300acee850ea10425b4"
+            "DiffID": "sha256:9d13c89fb66835859876cd4e635b56747743b9a7d086219a1ab093d4acde65cc"
           },
           "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-29088",
           "DataSource": {
@@ -3656,7 +3656,7 @@
           "InstalledVersion": "3.40.1-2+deb12u1",
           "Status": "affected",
           "Layer": {
-            "DiffID": "sha256:16a0a828d0fbf5214f31a17476331e8628411cb420dda300acee850ea10425b4"
+            "DiffID": "sha256:9d13c89fb66835859876cd4e635b56747743b9a7d086219a1ab093d4acde65cc"
           },
           "SeveritySource": "debian",
           "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2021-45346",
@@ -5351,7 +5351,7 @@
           "FixedVersion": "23.3",
           "Status": "fixed",
           "Layer": {
-            "DiffID": "sha256:16a0a828d0fbf5214f31a17476331e8628411cb420dda300acee850ea10425b4"
+            "DiffID": "sha256:9d13c89fb66835859876cd4e635b56747743b9a7d086219a1ab093d4acde65cc"
           },
           "SeveritySource": "ghsa",
           "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-5752",
@@ -5428,7 +5428,7 @@
           "FixedVersion": "70.0.0",
           "Status": "fixed",
           "Layer": {
-            "DiffID": "sha256:16a0a828d0fbf5214f31a17476331e8628411cb420dda300acee850ea10425b4"
+            "DiffID": "sha256:9d13c89fb66835859876cd4e635b56747743b9a7d086219a1ab093d4acde65cc"
           },
           "SeveritySource": "ghsa",
           "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-6345",
@@ -5503,7 +5503,7 @@
           "FixedVersion": "78.1.1",
           "Status": "fixed",
           "Layer": {
-            "DiffID": "sha256:16a0a828d0fbf5214f31a17476331e8628411cb420dda300acee850ea10425b4"
+            "DiffID": "sha256:9d13c89fb66835859876cd4e635b56747743b9a7d086219a1ab093d4acde65cc"
           },
           "SeveritySource": "ghsa",
           "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-47273",

@@ -21,11 +21,17 @@ jobs:
 
     - name: Install Trivy
       run: |
-        curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
+        curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+
+    - name: Add /usr/local/bin to PATH for Trivy
+      run: echo "/usr/local/bin" >> $GITHUB_PATH
 
     - name: Install Grype
       run: |
-        curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh
+        curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
+
+    - name: Add /usr/local/bin to PATH for Grype
+      run: echo "/usr/local/bin" >> $GITHUB_PATH
 
     - name: Create output directories
       run: |

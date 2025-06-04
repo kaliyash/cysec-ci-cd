@@ -10,13 +10,13 @@ def get_scan_results():
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     cursor.execute("""
-        SELECT scan_date, tool, issue_count
+        SELECT tool, MAX(scan_date) as latest_scan, issue_count
         FROM scan_results
-        ORDER BY scan_date DESC
-        LIMIT 50
+        GROUP BY tool
+        ORDER BY latest_scan DESC
     """)
     results = cursor.fetchall()
-    print(f"Fetched {len(results)} records from DB")
+    print(f"Fetched {len(results)} latest records from DB")
     conn.close()
     return results
 

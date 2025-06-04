@@ -77,11 +77,12 @@ jobs:
       env:
         CUSTOM_TOKEN: ${{ secrets.CYBERSEC_CI_CD_TOKEN }}
       run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git config user.name "Auto Commit Bot"
+        git config user.email "bot@ci-cd.local"
+        git remote set-url origin https://x-access-token:${CUSTOM_TOKEN}@github.com/${{ github.repository }}
         git add scans/code/bandit.json scans/code/semgrep.json scans/image/trivy.json scans/image/grype.json
         git commit -m "Add latest scan results [skip ci]" || echo "No changes to commit"
-        git push https://${CUSTOM_TOKEN}@github.com/${{ github.repository }} HEAD:${{ github.ref_name }}
+        git push origin HEAD:${{ github.ref_name }}
 
     - name: Upload raw scan JSON results
       uses: actions/upload-artifact@v4

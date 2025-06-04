@@ -20,6 +20,10 @@ jobs:
         pip install bandit semgrep
         curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
         curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh
+     - name: Create output directories
+       run: |
+        mkdir -p scans/code
+        mkdir -p scans/image
 
     - name: Run Bandit
       run: bandit -r . -f json -o scans/code/bandit.json

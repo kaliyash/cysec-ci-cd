@@ -1,8 +1,7 @@
 import json
 import sqlite3
 import os
-from datetime import timezone
-(datetime.now(timezone.utc).isoformat(), tool, count)
+from datetime import datetime, timezone
 
 DB_PATH = "scan_results.db"
 
@@ -51,7 +50,7 @@ def init_db():
 def insert_result(conn, tool, count):
     c = conn.cursor()
     c.execute('INSERT INTO scan_results (scan_date, tool, issue_count) VALUES (?, ?, ?)',
-              (datetime.utcnow().isoformat(), tool, count))
+              (datetime.now(timezone.utc).isoformat(), tool, count))
     conn.commit()
 
 def main():
@@ -72,4 +71,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

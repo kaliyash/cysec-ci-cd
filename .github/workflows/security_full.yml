@@ -73,6 +73,20 @@ jobs:
         name: scan-results-db
         path: scan_results.db
 
+    - name: Configure Git user
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+
+    - name: Commit scan results to repo
+      run: |
+        git add scans/code/bandit.json scans/code/semgrep.json scans/image/trivy.json scans/image/grype.json
+        git commit -m "Add latest security scan JSON results [skip ci]" || echo "No changes to commit"
+
+    - name: Push changes
+      run: git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Upload raw scan JSON results
       uses: actions/upload-artifact@v4
       with:

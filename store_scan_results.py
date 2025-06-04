@@ -8,10 +8,11 @@ DB_PATH = "scan_results.db"
 def load_json(path):
     if os.path.exists(path):
         with open(path, 'r') as f:
-    content = f.read().strip()
-    if not content:
-        return None
-    return json.loads(content)
+            content = f.read().strip()
+            if not content:
+                return None
+            return json.loads(content)
+    return None
 
 def count_bandit_issues(data):
     return len(data.get('results', [])) if data else 0
@@ -70,3 +71,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

@@ -60,7 +60,7 @@ jobs:
       run: |
         grype insecure-app -o json > scans/image/grype.json || echo '{"matches":[]}' > scans/image/grype.json
         test -f scans/image/grype.json || echo '{"matches":[]}' > scans/image/grype.json
-
+     
     - name: Verify scan output files
       run: ls -lR scans
 
@@ -75,7 +75,7 @@ jobs:
 
     - name: Commit and push scan results to repo
       env:
-        GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.CYBERSEC_CI_CD_TOKEN }}
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"

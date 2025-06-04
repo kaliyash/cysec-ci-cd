@@ -73,20 +73,17 @@ jobs:
         name: scan-results-db
         path: scan_results.db
 
-    - name: Configure Git user
+      - name: Commit and push scan results to repo
+      env:
+        GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
-
-    - name: Commit scan results to repo
-      run: |
         git add scans/code/bandit.json scans/code/semgrep.json scans/image/trivy.json scans/image/grype.json
-        git commit -m "Add latest security scan JSON results [skip ci]" || echo "No changes to commit"
+        git commit -m "Add latest scan results [skip ci]" || echo "No changes to commit"
+        git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }} HEAD:${{ github.ref_name }}
 
-    - name: Push changes
-      run: git push
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Upload raw scan JSON results
       uses: actions/upload-artifact@v4
       with:

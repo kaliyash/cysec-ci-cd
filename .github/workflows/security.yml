@@ -37,7 +37,7 @@ jobs:
       run: ./grype insecure-app -o json > scans/image/grype.json
 
     - name: Upload scan results
-      uses: actions/upload-artifact@v4.3.1
+      uses: actions/upload-artifact@v4.
       with:
         name: scan-results
         path: scans/

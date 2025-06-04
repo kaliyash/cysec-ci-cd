@@ -42,10 +42,10 @@ jobs:
       run: docker build -t insecure-app .
 
     - name: Run Trivy scan
-      run: ./trivy image -f json -o scans/image/trivy.json insecure-app || true
+      run: trivy image -f json -o scans/image/trivy.json insecure-app || true
 
     - name: Run Grype scan
-      run: ./grype insecure-app -o json > scans/image/grype.json || true
+      run: grype insecure-app -o json > scans/image/grype.json || true
 
     - name: Store scan results in SQLite DB
       run: python3 store_scan_results.py

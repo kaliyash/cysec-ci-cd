@@ -17,7 +17,7 @@ jobs:
 
     - name: Install Bandit and Semgrep
       run: |
-        pip install bandit semgrep
+        pip install bandit semgrep requests
 
     - name: Install Trivy
       run: |
@@ -52,3 +52,60 @@ jobs:
       with:
         name: scan-results
         path: scans/
+
+    - name: Send Discord alert if vulnerabilities found
+      env:
+        DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      run: |
+        python3 - <<'EOF'
+        import json
+        import os
+        import sys
+        import requests
+
+        def load_json(path):
+            if os.path.exists(path):
+                with open(path, 'r') as f:
+                    return json.load(f)
+            return None
+
+        def count_bandit_issues(data):
+            if not data or 'results' not in data:
+                return 0
+            return len(data['results'])
+
+        def count_semgrep_issues(data):
+            if not data or 'results' not in data:
+                return 0
+            return len(data['results'])
+
+        bandit_path = "scans/code/bandit.json"
+        semgrep_path = "scans/code/semgrep.json"
+
+        bandit_data = load_json(bandit_path)
+        semgrep_data = load_json(semgrep_path)
+
+        bandit_issues = count_bandit_issues(bandit_data)
+        semgrep_issues = count_semgrep_issues(semgrep_data)
+
+        total_issues = bandit_issues + semgrep_issues
+
+        if total_issues == 0:
+            print("No vulnerabilities found by Bandit or Semgrep. No alert sent.")
+            sys.exit(0)
+
+        message = f"⚠️ Security Scan Alert:\nBandit issues: {bandit_issues}\nSemgrep issues: {semgrep_issues}\nTotal issues: {total_issues}"
+
+        webhook_url = os.getenv("DISCORD_WEBHOOK_URL")
+        if not webhook_url:
+            print("No Discord webhook URL set. Exiting.")
+            sys.exit(1)
+
+        payload = {"content": message}
+        response = requests.post(webhook_url, json=payload)
+        if response.status_code == 204:
+            print("Discord alert sent successfully.")
+        else:
+            print(f"Failed to send Discord alert: {response.status_code}, {response.text}")
+            sys.exit(1)
+        EOF

@@ -21,7 +21,7 @@ jobs:
 
     - name: Install Trivy
       run: |
-         curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+        curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
 
     - name: Add /usr/local/bin to PATH for Trivy
       run: echo "/usr/local/bin" >> $GITHUB_PATH
@@ -39,28 +39,46 @@ jobs:
         mkdir -p scans/image
 
     - name: Run Bandit scan
-      run: bandit -r . -f json -o scans/code/bandit.json || echo '{}' > scans/code/bandit.json
+      run: |
+        bandit -r . -f json -o scans/code/bandit.json || echo '{}' > scans/code/bandit.json
+        test -f scans/code/bandit.json || echo '{}' > scans/code/bandit.json
 
     - name: Run Semgrep scan
-      run: semgrep scan --config=auto --json --output=scans/code/semgrep.json || echo '{"results":[]}' > scans/code/semgrep.json
+      run: |
+        semgrep scan --config=auto --json --output=scans/code/semgrep.json || echo '{"results":[]}' > scans/code/semgrep.json
+        test -f scans/code/semgrep.json || echo '{"results":[]}' > scans/code/semgrep.json
 
     - name: Build Docker image
       run: docker build -t insecure-app .
 
     - name: Run Trivy scan
-      run: trivy image -f json -o scans/image/trivy.json insecure-app || echo '{"Results":[]}' > scans/image/trivy.json
+      run: |
+        trivy image -f json -o scans/image/trivy.json insecure-app || echo '{"Results":[]}' > scans/image/trivy.json
+        test -f scans/image/trivy.json || echo '{"Results":[]}' > scans/image/trivy.json
 
     - name: Run Grype scan
-      run: grype insecure-app -o json > scans/image/grype.json || echo '{"matches":[]}' > scans/image/grype.json
+      run: |
+        grype insecure-app -o json > scans/image/grype.json || echo '{"matches":[]}' > scans/image/grype.json
+        test -f scans/image/grype.json || echo '{"matches":[]}' > scans/image/grype.json
 
     - name: Store scan results in SQLite DB
       run: python3 store_scan_results.py
 
-    - name: Upload scan results
+    - name: Upload scan results database
       uses: actions/upload-artifact@v4
       with:
-        name: scan-results
+        name: scan-results-db
         path: scan_results.db
+
+    - name: Upload raw scan JSON results
+      uses: actions/upload-artifact@v4
+      with:
+        name: raw-scan-results
+        path: |
+          scans/code/bandit.json
+          scans/code/semgrep.json
+          scans/image/trivy.json
+          scans/image/grype.json
 
     - name: Send Discord alert if vulnerabilities found
       env:

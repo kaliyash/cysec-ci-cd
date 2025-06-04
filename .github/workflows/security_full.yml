@@ -79,10 +79,11 @@ jobs:
       run: |
         git config user.name "Auto Commit Bot"
         git config user.email "bot@ci-cd.local"
+        git credential-cache exit || true
         git remote set-url origin https://x-access-token:${CUSTOM_TOKEN}@github.com/${{ github.repository }}
         git add scans/code/bandit.json scans/code/semgrep.json scans/image/trivy.json scans/image/grype.json
         git commit -m "Add latest scan results [skip ci]" || echo "No changes to commit"
-        git push origin HEAD:${{ github.ref_name }}
+        GIT_TERMINAL_PROMPT=0 git push origin HEAD:${{ github.ref_name }}
 
     - name: Upload raw scan JSON results
       uses: actions/upload-artifact@v4
@@ -99,7 +100,10 @@ jobs:
         DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}
       run: |
         python3 - <<'EOF'
-        import json, os, sys, requests
+        import json
+        import os
+        import sys
+        import requests
 
         def load_json(path):
             if os.path.exists(path):
@@ -114,47 +118,67 @@ jobs:
                     return None
             return None
 
-        def count_bandit_issues(data): return len(data.get('results', [])) if data else 0
-        def count_semgrep_issues(data): return len(data.get('results', [])) if data else 0
+        def count_bandit_issues(data):
+            if not data or 'results' not in data:
+                return 0
+            return len(data['results'])
+
+        def count_semgrep_issues(data):
+            if not data or 'results' not in data:
+                return 0
+            return len(data['results'])
+
         def count_trivy_issues(data):
-            if not data or 'Results' not in data: return 0
-            return sum(len(r.get('Vulnerabilities', [])) for r in data['Results'])
-        def count_grype_issues(data): return len(data.get('matches', [])) if data else 0
+            if not data or 'Results' not in data:
+                return 0
+            count = 0
+            for result in data['Results']:
+                vulnerabilities = result.get('Vulnerabilities')
+                if vulnerabilities:
+                    count += len(vulnerabilities)
+            return count
 
-        bandit = load_json("scans/code/bandit.json")
-        semgrep = load_json("scans/code/semgrep.json")
-        trivy = load_json("scans/image/trivy.json")
-        grype = load_json("scans/image/grype.json")
+        def count_grype_issues(data):
+            if not data or 'matches' not in data:
+                return 0
+            return len(data['matches'])
 
-        total = sum([
-            count_bandit_issues(bandit),
-            count_semgrep_issues(semgrep),
-            count_trivy_issues(trivy),
-            count_grype_issues(grype)
-        ])
+        bandit_data = load_json("scans/code/bandit.json")
+        semgrep_data = load_json("scans/code/semgrep.json")
+        trivy_data = load_json("scans/image/trivy.json")
+        grype_data = load_json("scans/image/grype.json")
 
-        if total == 0:
-            print("No vulnerabilities found. No alert sent.")
+        bandit_issues = count_bandit_issues(bandit_data)
+        semgrep_issues = count_semgrep_issues(semgrep_data)
+        trivy_issues = count_trivy_issues(trivy_data)
+        grype_issues = count_grype_issues(grype_data)
+
+        total_issues = bandit_issues + semgrep_issues + trivy_issues + grype_issues
+
+        if total_issues == 0:
+            print("No vulnerabilities found by any tool. No alert sent.")
             sys.exit(0)
 
         message = (
             f"⚠ Security Scan Alert:\n"
-            f"Bandit issues: {count_bandit_issues(bandit)}\n"
-            f"Semgrep issues: {count_semgrep_issues(semgrep)}\n"
-            f"Trivy issues: {count_trivy_issues(trivy)}\n"
-            f"Grype issues: {count_grype_issues(grype)}\n"
-            f"Total issues: {total}"
+            f"Bandit issues: {bandit_issues}\n"
+            f"Semgrep issues: {semgrep_issues}\n"
+            f"Trivy issues: {trivy_issues}\n"
+            f"Grype issues: {grype_issues}\n"
+            f"Total issues: {total_issues}"
         )
 
-        webhook = os.getenv("DISCORD_WEBHOOK_URL")
-        if not webhook:
-            print("No webhook set. Exiting.")
+        webhook_url = os.getenv("DISCORD_WEBHOOK_URL")
+        if not webhook_url:
+            print("No Discord webhook URL set. Exiting.")
             sys.exit(1)
 
-        r = requests.post(webhook, json={"content": message})
-        if r.status_code == 204:
-            print("Alert sent.")
+        payload = {"content": message}
+        response = requests.post(webhook_url, json=payload)
+
+        if response.status_code == 204:
+            print("Discord alert sent successfully.")
         else:
-            print(f"Discord alert failed: {r.status_code} - {r.text}")
+            print(f"Failed to send Discord alert: {response.status_code}, {response.text}")
             sys.exit(1)
         EOF

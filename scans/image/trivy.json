@@ -1,6 +1,6 @@
 {
   "SchemaVersion": 2,
-  "CreatedAt": "2025-06-04T20:55:18.313353739Z",
+  "CreatedAt": "2025-06-04T21:01:16.45354937Z",
   "ArtifactName": "insecure-app",
   "ArtifactType": "container_image",
   "Metadata": {
@@ -9,23 +9,23 @@
       "Family": "debian",
       "Name": "12.11"
     },
-    "ImageID": "sha256:cc8f85c2b75d19ff16fdea137a37b4788ca50f6af1623e324f6e88bc47c58393",
+    "ImageID": "sha256:dff24f3f095d72e310d115e848adf69fabd3a63bece0a56faf3bdb02d8774459",
     "DiffIDs": [
       "sha256:ace34d1d784c01e3f9d156687089e8f58f786e23ccd097bdbbf337d6d28b3783",
       "sha256:5a6a85bb1c4a7c040bcba5986afa0d54830e3bd430d7438832c814275f8d6ada",
       "sha256:9d13c89fb66835859876cd4e635b56747743b9a7d086219a1ab093d4acde65cc",
       "sha256:28b83acd74ab82d4015a64b7305df95bd38b6783230d6c2742673025ddeaf42b",
-      "sha256:2a158cf7a63d43086a11a3a2a2c3aea076ff74ae585d928bb8a5916c08feda45",
-      "sha256:3ffd3f1dd0b0195ca85263a707ce1a089f2d215a523df6a254cc40ae2d0aae61",
-      "sha256:fce27c2f47b8f5b5a10e79816f60dd30053a3cb38ae987f33bc894197a514ddb",
-      "sha256:4602b3050a7384c8e71d9039aa6955df2143e6ea92843880165808f1b1e00a7d"
+      "sha256:8a25ce8acb92d082522d5b96398e9a7d0c0c035d9ba732ab22c29d22bf27d6ca",
+      "sha256:8cd0d4fe0d23359b9d13be9db05632082bf1891a02316fe7e4d7415501795b82",
+      "sha256:b35fa560eb00c6b4266044d829739a68c7f6d42ef131e37c0a2bbfa21ed73a31",
+      "sha256:75ccfdf9e18ba9eb5a732341836337f5621d0593d7247c6430527f3a724d328f"
     ],
     "RepoTags": [
       "insecure-app:latest"
     ],
     "ImageConfig": {
       "architecture": "amd64",
-      "created": "2025-06-04T20:55:08.513377652Z",
+      "created": "2025-06-04T21:01:06.498533526Z",
       "history": [
         {
           "created": "2025-05-20T00:00:00Z",
@@ -84,27 +84,27 @@
           "empty_layer": true
         },
         {
-          "created": "2025-06-04T20:54:52Z",
+          "created": "2025-06-04T21:00:52Z",
           "created_by": "WORKDIR /app",
           "comment": "buildkit.dockerfile.v0"
         },
         {
-          "created": "2025-06-04T20:54:52Z",
+          "created": "2025-06-04T21:00:52Z",
           "created_by": "COPY app/ app/ # buildkit",
           "comment": "buildkit.dockerfile.v0"
         },
         {
-          "created": "2025-06-04T20:54:52Z",
+          "created": "2025-06-04T21:00:52Z",
           "created_by": "COPY requirements.txt . # buildkit",
           "comment": "buildkit.dockerfile.v0"
         },
         {
-          "created": "2025-06-04T20:55:08Z",
+          "created": "2025-06-04T21:01:06Z",
           "created_by": "RUN /bin/sh -c pip install --no-cache-dir -r requirements.txt # buildkit",
           "comment": "buildkit.dockerfile.v0"
         },
         {
-          "created": "2025-06-04T20:55:08Z",
+          "created": "2025-06-04T21:01:06Z",
           "created_by": "CMD [\"python3\" \"app/app.py\"]",
           "comment": "buildkit.dockerfile.v0",
           "empty_layer": true
@@ -118,10 +118,10 @@
           "sha256:5a6a85bb1c4a7c040bcba5986afa0d54830e3bd430d7438832c814275f8d6ada",
           "sha256:9d13c89fb66835859876cd4e635b56747743b9a7d086219a1ab093d4acde65cc",
           "sha256:28b83acd74ab82d4015a64b7305df95bd38b6783230d6c2742673025ddeaf42b",
-          "sha256:2a158cf7a63d43086a11a3a2a2c3aea076ff74ae585d928bb8a5916c08feda45",
-          "sha256:3ffd3f1dd0b0195ca85263a707ce1a089f2d215a523df6a254cc40ae2d0aae61",
-          "sha256:fce27c2f47b8f5b5a10e79816f60dd30053a3cb38ae987f33bc894197a514ddb",
-          "sha256:4602b3050a7384c8e71d9039aa6955df2143e6ea92843880165808f1b1e00a7d"
+          "sha256:8a25ce8acb92d082522d5b96398e9a7d0c0c035d9ba732ab22c29d22bf27d6ca",
+          "sha256:8cd0d4fe0d23359b9d13be9db05632082bf1891a02316fe7e4d7415501795b82",
+          "sha256:b35fa560eb00c6b4266044d829739a68c7f6d42ef131e37c0a2bbfa21ed73a31",
+          "sha256:75ccfdf9e18ba9eb5a732341836337f5621d0593d7247c6430527f3a724d328f"
         ]
       },
       "config": {
@@ -159,19 +159,19 @@
       },
       {
         "Size": 1536,
-        "DiffID": "sha256:2a158cf7a63d43086a11a3a2a2c3aea076ff74ae585d928bb8a5916c08feda45"
+        "DiffID": "sha256:8a25ce8acb92d082522d5b96398e9a7d0c0c035d9ba732ab22c29d22bf27d6ca"
       },
       {
         "Size": 3072,
-        "DiffID": "sha256:3ffd3f1dd0b0195ca85263a707ce1a089f2d215a523df6a254cc40ae2d0aae61"
+        "DiffID": "sha256:8cd0d4fe0d23359b9d13be9db05632082bf1891a02316fe7e4d7415501795b82"
       },
       {
         "Size": 2560,
-        "DiffID": "sha256:fce27c2f47b8f5b5a10e79816f60dd30053a3cb38ae987f33bc894197a514ddb"
+        "DiffID": "sha256:b35fa560eb00c6b4266044d829739a68c7f6d42ef131e37c0a2bbfa21ed73a31"
       },
       {
         "Size": 253384704,
-        "DiffID": "sha256:4602b3050a7384c8e71d9039aa6955df2143e6ea92843880165808f1b1e00a7d"
+        "DiffID": "sha256:75ccfdf9e18ba9eb5a732341836337f5621d0593d7247c6430527f3a724d328f"
       }
     ]
   },

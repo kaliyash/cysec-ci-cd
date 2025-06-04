@@ -1,7 +1,8 @@
 import json
 import sqlite3
 import os
-from datetime import datetime
+from datetime import timezone
+(datetime.now(timezone.utc).isoformat(), tool, count)
 
 DB_PATH = "scan_results.db"
 

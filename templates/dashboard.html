@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Security Scan Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        table { border-collapse: collapse; width: 80%; margin: 20px auto; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+        th { background-color: #f4f4f4; }
+    </style>
+</head>
+<body>
+    <h2 style="text-align:center;">Security Scan Results</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Scan Date</th>
+                <th>Tool</th>
+                <th>Issue Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for scan_date, tool, issue_count in results %}
+            <tr>
+                <td>{{ scan_date }}</td>
+                <td>{{ tool }}</td>
+                <td>{{ issue_count }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

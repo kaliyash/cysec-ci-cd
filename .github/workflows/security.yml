@@ -82,22 +82,45 @@ jobs:
                 return 0
             return len(data['results'])
 
-        bandit_path = "scans/code/bandit.json"
-        semgrep_path = "scans/code/semgrep.json"
+        def count_trivy_issues(data):
+            if not data or 'Results' not in data:
+                return 0
+            count = 0
+            for result in data['Results']:
+                vulnerabilities = result.get('Vulnerabilities')
+                if vulnerabilities:
+                    count += len(vulnerabilities)
+            return count
 
-        bandit_data = load_json(bandit_path)
-        semgrep_data = load_json(semgrep_path)
+        def count_grype_issues(data):
+            if not data or 'matches' not in data:
+                return 0
+            return len(data['matches'])
+
+        bandit_data = load_json("scans/code/bandit.json")
+        semgrep_data = load_json("scans/code/semgrep.json")
+        trivy_data = load_json("scans/image/trivy.json")
+        grype_data = load_json("scans/image/grype.json")
 
         bandit_issues = count_bandit_issues(bandit_data)
         semgrep_issues = count_semgrep_issues(semgrep_data)
+        trivy_issues = count_trivy_issues(trivy_data)
+        grype_issues = count_grype_issues(grype_data)
 
-        total_issues = bandit_issues + semgrep_issues
+        total_issues = bandit_issues + semgrep_issues + trivy_issues + grype_issues
 
         if total_issues == 0:
-            print("No vulnerabilities found by Bandit or Semgrep. No alert sent.")
+            print("No vulnerabilities found by any tool. No alert sent.")
             sys.exit(0)
 
-        message = f"⚠️ Security Scan Alert:\nBandit issues: {bandit_issues}\nSemgrep issues: {semgrep_issues}\nTotal issues: {total_issues}"
+        message = (
+            f"⚠️ Security Scan Alert:\n"
+            f"Bandit issues: {bandit_issues}\n"
+            f"Semgrep issues: {semgrep_issues}\n"
+            f"Trivy issues: {trivy_issues}\n"
+            f"Grype issues: {grype_issues}\n"
+            f"Total issues: {total_issues}"
+        )
 
         webhook_url = os.getenv("DISCORD_WEBHOOK_URL")
         if not webhook_url:
@@ -106,6 +129,7 @@ jobs:
 
         payload = {"content": message}
         response = requests.post(webhook_url, json=payload)
+
         if response.status_code == 204:
             print("Discord alert sent successfully.")
         else:

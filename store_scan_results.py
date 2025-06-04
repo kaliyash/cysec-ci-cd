@@ -1,4 +1,4 @@
-import json
+\import json
 import sqlite3
 import os
 from datetime import datetime
@@ -8,8 +8,10 @@ DB_PATH = "scan_results.db"
 def load_json(path):
     if os.path.exists(path):
         with open(path, 'r') as f:
-            return json.load(f)
-    return None
+    content = f.read().strip()
+    if not content:
+        return None
+    return json.loads(content)
 
 def count_bandit_issues(data):
     return len(data.get('results', [])) if data else 0

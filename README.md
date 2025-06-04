@@ -4,6 +4,10 @@
 
 This project establishes a CI/CD security automation framework using GitHub Actions, integrating multiple static and container vulnerability scanning tools. It stores the scan results in a persistent SQLite database, sends Discord alerts upon detection of vulnerabilities, and presents a web-based dashboard using Flask for visualization.
 
+## System Architecture Diagram
+
+![Architecture Diagram](https://github.com/kaliyash/cysec-ci-cd/blob/master/docs/screenshots/SystemArchitectureDiagram.png)
+
 ## Project Objectives
 
 - Automate code and container security scanning during every code push or pull request.
@@ -23,20 +27,22 @@ This project establishes a CI/CD security automation framework using GitHub Acti
 - **Discord Webhooks** for alerting.
 
 ## Folder Structure
-cysec-ci-cd/
-├── .github/
-│   └── workflows/
-│       └── security_full.yml         # GitHub Actions CI workflow
-├── scans/                            # Stores raw scan outputs from tools
-│   ├── code/                         # Bandit and Semgrep outputs
-│   └── image/                        # Trivy and Grype outputs
-├── templates/
-│   └── dashboard.html                # HTML template for Flask dashboard
-├── dashboard.py                      # Flask app to visualize scan results
-├── scan_results.db                   # SQLite database (auto-generated)
-├── store_scan_results.py            # Script to insert scan results into DB
-├── requirements.txt                  # Python dependencies list
-├── README.md                         # Project documentation
+.github/workflows/security_full.yml – GitHub Actions workflow for automated scanning
+
+scans/ – Directory storing raw scan outputs
+   code/ – Bandit and Semgrep JSON outputs
+   image/ – Trivy and Grype JSON outputs
+
+templates/
+    dashboard.html – Jinja2 template for the Flask dashboard
+
+dashboard.py – Flask application to visualize scan results
+
+store_scan_results.py – Script to parse scan outputs into SQLite DB
+
+scan_results.db – SQLite database containing structured scan summaries
+
+README.md – Project overview and documentation
 
 ## Environment Setup
 
@@ -70,12 +76,15 @@ cysec-ci-cd/
    Upload the scan database as an artifact.
    Trigger a Discord alert if any issues are found.
 
-
+![CI Pipeline](https://github.com/kaliyash/cysec-ci-cd/blob/master/docs/screenshots/Commit.png)  
+![CI Pipeline](https://github.com/kaliyash/cysec-ci-cd/blob/master/docs/screenshots/Commit1.png)
 
 3. To manually insert scan results into the database:
    ```bash
    python3 store_scan_results.py
-  
+
+![Scan](https://github.com/kaliyash/cysec-ci-cd/blob/master/docs/screenshots/Scan.png)
+
 
 4. To launch the Flask dashboard:
    ```bash
@@ -87,14 +96,12 @@ Once running, access the dashboard at: http://localhost:5000
 ## Dashboard
 The Flask dashboard reads from scan_results.db and displays the latest issue count for each tool in a tabular format. The dashboard template is located at templates/dashboard.html.
 
-
-
+![Dashboard](https://github.com/kaliyash/cysec-ci-cd/blob/master/docs/screenshots/Dashboard.png)
 
 ## Discord Alert Logic
 If scan result JSON files contain any vulnerabilities, a formatted message is sent to the Discord webhook. If no vulnerabilities are found, no alert is sent.
 
-
-
+![Discord Alert](https://github.com/kaliyash/cysec-ci-cd/blob/master/docs/screenshots/Discord.png)
 
 ## License
 This project is for educational and demonstration purposes only.

@@ -60,7 +60,7 @@ jobs:
       run: |
         grype insecure-app -o json > scans/image/grype.json || echo '{"matches":[]}' > scans/image/grype.json
         test -f scans/image/grype.json || echo '{"matches":[]}' > scans/image/grype.json
-     
+
     - name: Verify scan output files
       run: ls -lR scans
 
@@ -73,7 +73,7 @@ jobs:
         name: scan-results-db
         path: scan_results.db
 
-      - name: Commit and push scan results to repo
+    - name: Commit and push scan results to repo
       env:
         GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       run: |
@@ -82,7 +82,6 @@ jobs:
         git add scans/code/bandit.json scans/code/semgrep.json scans/image/trivy.json scans/image/grype.json
         git commit -m "Add latest scan results [skip ci]" || echo "No changes to commit"
         git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }} HEAD:${{ github.ref_name }}
-
 
     - name: Upload raw scan JSON results
       uses: actions/upload-artifact@v4

@@ -1,0 +1,54 @@
+name: Security CI
+
+on: [push, pull_request]
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Install Bandit and Semgrep
+      run: |
+        pip install bandit semgrep
+
+    - name: Install Trivy
+      run: |
+        curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
+
+    - name: Install Grype
+      run: |
+        curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh
+
+    - name: Create output directories
+      run: |
+        mkdir -p scans/code
+        mkdir -p scans/image
+
+    - name: Run Bandit scan
+      run: bandit -r . -f json -o scans/code/bandit.json || true
+
+    - name: Run Semgrep scan
+      run: semgrep scan --config=auto --json --output=scans/code/semgrep.json || true
+
+    - name: Build Docker image
+      run: docker build -t insecure-app .
+
+    - name: Run Trivy scan
+      run: ./trivy image -f json -o scans/image/trivy.json insecure-app || true
+
+    - name: Run Grype scan
+      run: ./grype insecure-app -o json > scans/image/grype.json || true
+
+    - name: Upload scan results
+      uses: actions/upload-artifact@v4
+      with:
+        name: scan-results
+        path: scans/

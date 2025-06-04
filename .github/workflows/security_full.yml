@@ -60,6 +60,9 @@ jobs:
       run: |
         grype insecure-app -o json > scans/image/grype.json || echo '{"matches":[]}' > scans/image/grype.json
         test -f scans/image/grype.json || echo '{"matches":[]}' > scans/image/grype.json
+     
+    - name: Verify scan output files
+      run: ls -lR scans
 
     - name: Store scan results in SQLite DB
       run: python3 store_scan_results.py

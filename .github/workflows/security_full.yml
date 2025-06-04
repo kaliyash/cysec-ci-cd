@@ -68,8 +68,15 @@ jobs:
 
         def load_json(path):
             if os.path.exists(path):
-                with open(path, 'r') as f:
-                    return json.load(f)
+                try:
+                    with open(path, 'r') as f:
+                        content = f.read().strip()
+                        if not content:
+                            return None
+                        return json.loads(content)
+                except json.JSONDecodeError:
+                    print(f"Warning: JSON decode error in {path}")
+                    return None
             return None
 
         def count_bandit_issues(data):
@@ -114,7 +121,7 @@ jobs:
             sys.exit(0)
 
         message = (
-            f"⚠️ Security Scan Alert:\n"
+            f"⚠ Security Scan Alert:\n"
             f"Bandit issues: {bandit_issues}\n"
             f"Semgrep issues: {semgrep_issues}\n"
             f"Trivy issues: {trivy_issues}\n"
